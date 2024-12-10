@@ -26,6 +26,10 @@ const handleSubmit=(e)=>{
   if(input.toLowerCase()===data[2].word){
     setDisplay(data[2].meaning)
   }
+  else {
+    
+    setDisplay("Word not found in the dictionary.")
+  }
   
 }
 
