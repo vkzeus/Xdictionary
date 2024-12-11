@@ -12,8 +12,12 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const foundWord = data.find((item) => item.word === input.toLowerCase());
+
+    // Normalize the input for case-insensitive comparison
+    const searchWord = input.trim().toLowerCase();
+
+    // Check if input matches a word in the dictionary
+    const foundWord = data.find((item) => item.word === searchWord);
 
     if (foundWord) {
       setDisplay(foundWord.meaning);
@@ -23,18 +27,22 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ fontFamily: "Arial, sans-serif", textAlign: "center", marginTop: "20px" }}>
       <h2>Dictionary App</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <input
           type="text"
           placeholder="Search for a word"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          style={{ padding: "8px", width: "200px", marginRight: "10px" }}
         />
-        <button type="submit">Search</button>
+        <button type="submit" style={{ padding: "8px 16px" }}>
+          Search
+        </button>
       </form>
-      <h4>Definition: {display}</h4>
+      <h4>Definition:</h4>
+      <p style={{ fontSize: "18px", color: "blue" }}>{display}</p>
     </div>
   );
 }
