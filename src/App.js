@@ -1,49 +1,40 @@
-import { useState } from "react";
-
+import React, { useState } from "react";
 
 function App() {
-  const[input,setInput]=useState("");
-  const[display,setDisplay]=useState("");
-  
-const data=[
+  const [input, setInput] = useState("");
+  const [display, setDisplay] = useState("");
 
-  { word: "react", meaning: "A JavaScript library for building user interfaces." },
+  const data = [
+    { word: "react", meaning: "A JavaScript library for building user interfaces." },
+    { word: "component", meaning: "A reusable building block in React." },
+    { word: "state", meaning: "An object that stores data for a component." },
+  ];
 
-  { word: "component", meaning: "A reusable building block in React." },
-
-  { word: "state", meaning: "An object that stores data for a component." }
-
-]
-const handleSubmit=(e)=>{
-  e.preventDefault();
-  
-  if(input.toLowerCase()===data[0].word){
-    setDisplay(data[0].meaning)
-  }
-  if(input.toLowerCase()===data[1].word){
-    setDisplay(data[1].meaning)
-  }
-  if(input.toLowerCase()===data[2].word){
-    setDisplay(data[2].meaning)
-  }
-  else {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     
-    setDisplay("Word not found in the dictionary.")
-  }
-  
-}
+    const foundWord = data.find((item) => item.word === input.toLowerCase());
+
+    if (foundWord) {
+      setDisplay(foundWord.meaning);
+    } else {
+      setDisplay("Word not found in the dictionary.");
+    }
+  };
 
   return (
     <div className="App">
       <h2>Dictionary App</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Search for a word" value={input} onChange={(e)=>setInput(e.target.value)}>
-        </input>
-      <button type="submit" >
-        Search
-      </button>
-      <h4>Definition: {display} </h4>
+        <input
+          type="text"
+          placeholder="Search for a word"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit">Search</button>
       </form>
+      <h4>Definition: {display}</h4>
     </div>
   );
 }
